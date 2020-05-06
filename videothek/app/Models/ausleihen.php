@@ -2,10 +2,13 @@
 
 class Ausleihen{
     public $id;
-    public $fk_kunden_id;
-    public $fk_film_id;
-    public $ausleihen_bis;
-    public $ausleih_status;
+    public $vorname;
+    public $nachname;
+    public $email;
+    public $telefon;
+    public $mitgliedStatus;
+    public $FK_film_id;
+    public $ausleihdatum;
 
     public $db;
 
