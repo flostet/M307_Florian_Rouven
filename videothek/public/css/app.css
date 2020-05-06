@@ -1,7 +1,75 @@
 body {
     text-align: center;
+    width: 100%;
+    margin: 0 auto; 
+    padding: 0;
+    background-color: #343434;
 }
 
 .welcome {
     padding-top: 40vh;
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+    height: 100;
+    width: 250;
+    position: fixed;
+    z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #363636;
+	overflow-x: hidden;
+	text-align: center;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+
+
+  /* Change the color of links on hover */
+  .topnav a:hover {
+    background-color: #656565;
+    color: white;
+  }
+  
+  /* Add a color to the active/current link */
+  .topnav a.active {
+    background-color: #656565;
+    color: white;
+  }
+
+
+  .container {
+	padding: 40px;
+	position: absolute;
+	display: flex;
+	flex-wrap: nowrap;
+	height: 50%;
+	width: 500px;
+	margin: 10;
+}
+
+.container>div {
+	color: white;
+	background-color: #ACACAC;
+	padding: 20px;
+	width: 350px;
+	height: 350px;
+	margin: 40px;
+	text-align: center;
+	font-size: 10px;
+}
+
+/* Counters */
+.counter {
+	font-size: 48px;
 }

@@ -3,8 +3,8 @@
 $router = new Router();
 
 $router->define([
-    '' => 'app/Controllers/WelcomeController.php',
-    'home' => 'app/Controllers/WelcomeController.php',
-    'ausleihehinzufügen' => 'app/Controllers/AusleiheHinzufügenController.php',
-    'Ausleihen' => 'app/Controllers/AusleihenListeController.php',
+    '' => 'app/Controllers/HomeController.php',
+    'home' => 'app/Controllers/HomeController.php',
+    'ausleiheerfassen' => 'app/Controllers/AusleiheErfassenController.php',
+    'ausleihen' => 'app/Controllers/AusleihenListeController.php',
 ]);
