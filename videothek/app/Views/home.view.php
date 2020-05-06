@@ -23,7 +23,7 @@
                 Gesamt Anzahl Videos
                 </h2>
                 <p class="counter">
-                30
+                <?=$countRecords ?>
                 </p>
             </div>
 

@@ -33,39 +33,11 @@ class Filme{
         return $statement->fetchAll();
     }
 
-    // Neue Ausleihe
-    public function create()
+    public function countRecords()
     {
-        $statement = $this->db->prepare('INSERT INTO ausleihen (vorname, nachname, email, telefon, mitgliedstatus, FK_film_id, ausleihdatum) VALUES (:vorname, :nachname, :email, :telefon, :mitgliedstatus, :FK_film_id, :ausleihdatum)');
-        $statement->bindParam(':vorname', $vornahme, PDO::PARAM_STR);
-        $statement->bindParam(':nachname', $nachname, PDO::PARAM_STR);
-        $statement->bindParam(':email', $email, PDO::PARAM_STR);
-        $statement->bindParam(':telefon', $telefon, PDO::PARAM_STR);
-        $statement->bindParam(':mitgliedstatus', $mitgliedstatus, PDO::PARAM_STR);
-        $statement->bindParam(':FK_film_id', $FK_film_id, PDO::PARAM_INT);
-        $statement->bindParam(':ausleihdatum', $ausleihdatum, PDO::PARAM_STR);
+        $statement = $this->db->prepare('SELECT COUNT(id) FROM filme');
+        $statement->execute();
 
-        return $statement->execute();
-    }
-
-    
-    public function update(int $id)
-    {
-        $statement = $this->db->prepare('UPDATE ausleihen SET vorname = :vorname, nachname = :nachname, email = :email, telefon = :telefon, FK_film_id = :FK_film_id, ausleihstatus = :ausleihstatus WHERE id = :id');
-        $statement->bindParam(':vorname', $vorname, PDO::PARAM_STR);
-        $statement->bindParam(':nachname', $nachname, PDO::PARAM_STR);
-        $statement->bindParam(':nachname', $nachname, PDO::PARAM_STR);
-        $statement->bindParam(':id', $id, PDO::PARAM_INT);
-
-        return $statement->execute();
-    }
-
-    // Lösche Task
-    public function delete(int $id)
-    {
-        $statement = $this->db->prepare('DELETE FROM ausleihen WHERE id = :id');
-        $statement->bindParam(':id', $id, PDO::PARAM_INT);
-
-        return $statement->execute();
+        return $statement->fetchAll();
     }
 }

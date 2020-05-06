@@ -2,62 +2,24 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Vidicted FilmAusleihe</title>
-    <link rel="stylesheet" href="public/css/app.css">
+    <title>Ausleih Liste</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h2 class="firma">Vidicted</h3>
-<h1 class="welcome">Ausleihe bearbeiten</h1>
-<?php
- $actionString = "bearbeiteAusleihe?id=" . $ausleiehn->id . ""
-?> 
+<div class="wrapper">
 
-<form action="<?= $actionString ?>" method="post">
-    <br>
-    <label for="inputName">Vorname:</label>
-    <input name="inputName" type="text" value='<?= $Ausleihe->vorname ?>'>
-    <br>
-    <br>
-    <label for="inputName">Nachname:</label>
-    <input name="inputName" type="text" value='<?= $Ausleihe->nachname ?>'>
-    <br>
-    <br>
-    <label for="inputEmail">Email:</label>
-    <input name="inputEmail" type="email" value='<?= $Ausleihe->email ?>'>
-    <br><br>
-    <label for="inputTelefon">Telefon:</label>
-    <input name="inputTelefon" type="number" value='<?= $Ausleihe->telefon ?>'>
-    <br><br>
-    <label for="inputAusgeleihtesVideo">Ausgelehnter Film:</label>
-    <select name="inputAusgeleihtesVideo">
-        <option value='<?= $Ausleihe->filmname ?>'><?= $Ausleihe->filmname ?></option>
-        <?php
-            $statement = db()->prepare('SELECT title FROM movies');
-            $statement->execute();
+    <h4>Ausgelihene Filme</h4>
+    <ul>
+        <?php foreach ($Ausleihe as $ausleihe): ?>
+            <li>
+                <?= $ausleihe['vorname'] ?> <?= $ausleihe['nachname'] ?> - <?php $filmName = $Filme->getById($ausleihe['FK_film_id']); echo implode(', ', $filmName);; ?> - <?= $ausleihe['ausleihdatum'] ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
 
-            $result = $statement->fetchAll();
-            foreach ($result as $movie)
-            {  
-                echo "<option value='" . $movie["title"] . "'>" . $movie["title"] . "</option>";
-            }
-        ?>
-    </select>
-    <br><br>
-    <label for="inputErledigt">Erledigt:</label>
-    <select name="inputErledigt">
-        <option value='0'>nicht erledigt</option>
-        <option value='1'>erledigt</option>
-    </select>
-    <br><br>
-    <div class="left-btn">        
-        <input class="btn" type="submit" value="Speichern"/>
-    </div>
-    <div class="right-btn">
-    <a href="uebersicht"> Abbrechen </a>
-    </div>
-    <br>
-    <br>
-</form>
+
+
+</div>
 
 </body>
 </html>
