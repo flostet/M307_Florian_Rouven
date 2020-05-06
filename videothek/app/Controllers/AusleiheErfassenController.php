@@ -9,11 +9,11 @@ if( ! file_exists($database)) {
 }
 
 // Einträge laden
-$guestbookEntries = json_decode(file_get_contents($database), true);
+$ausgehlentesvideoEntries = json_decode(file_get_contents($database), true);
 
 // Falls keine Einträge vorhanden ein leeres Array verwenden
-if($guestbookEntries === null) {
-    $guestbookEntries = [];
+if($ausgehlentesvideoEntries === null) {
+    $ausgehlentesvideoEntries = [];
 }
 
 $errors   = [];
@@ -67,13 +67,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 function saveToDatabase(string $name, string $message)
 {
-    global $database, $guestbookEntries;
+    global $database, $ausgehlentesvideoEntries;
 
     $newEntry = ['vorname' => $vorname, 'nachname' => $nachname, 'email' => $email, 'ausgehlentesvideo' => $ausgehlentesvideo, ];
 
     // Eintrag an Anfang von Array einfügen
-    array_unshift($guestbookEntries, $newEntry);
+    array_unshift($ausgehlentesvideoEntries, $newEntry);
 
     // Daten in File schreiben
-    file_put_contents($database, json_encode($guestbookEntries));
+    file_put_contents($database, json_encode($ausgehlentesvideoEntries));
 }

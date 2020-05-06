@@ -49,7 +49,7 @@
         <input class="btn" type="submit" value="Speichern"/>
     </div>
     <div class="right-btn">
-    <a href="uebersicht"> Cancel </a>
+    <a href="uebersicht"> Abbrechen </a>
     </div>
     <br>
     <br>
