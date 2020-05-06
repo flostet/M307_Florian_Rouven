@@ -35,27 +35,27 @@
 <form action="index.php?page=ausleiheerfassenController.php" method="post">
     <div class="control-group">
         <label class="control-label" for="vorname">Vorname:</label>
-        <input value="<?= $vorname ?>" name="vorname" type="text" class="input-xlarge" id="vorname">
+        <input  name="vorname" type="text" class="input-xlarge" id="vorname">
     </div>
     <div class="control-group">
         <label class="control-label" for="nachname">Nachname:</label>
-        <input value="<?= $nachname ?>" name="nachname" type="text" class="input-xlarge" id="nachname">
+        <input  name="nachname" type="text" class="input-xlarge" id="nachname">
     </div>
     <div class="control-group">
         <label class="control-label" for="email">Email:</label>
-        <textarea name="email" class="input-xlarge" id="email"><?= $email ?></textarea>
+        <input name="email" class="input-xlarge" id="email"><?= $email ?></input>
     </div>
     <div class="control-group">
         <label class="control-label" for="ausgelehntes video">Ausgelehntes Video:</label>
-        <input value="<?= $name ?>" name="ausgelehntes video" type="text" class="input-xlarge" id="ausgelehntes video">
+        <input name="ausgelehntes video" type="text" class="input-xlarge" id="ausgelehntes video">
     </div>
     <div class="control-group">
         <label class="control-label" for="telefon">Telefon:</label>
-        <input value="<?= $name ?>" name="telefon" type="text" class="input-xlarge" id="telefon">
+        <input name="telefon" type="text" class="input-xlarge" id="telefon">
     </div>
     <div class="control-group">
         <label class="control-label" for="mitgliederstatus">Mitgliederstatus:</label>
-        <input value="<?= $name ?>" name="mitgliederstatus" type="text" class="input-xlarge" id="mitgliederstatus">
+        <input name="mitgliederstatus" type="text" class="input-xlarge" id="mitgliederstatus">
     </div>
     
     <div class="control-group">
