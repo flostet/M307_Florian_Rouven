@@ -7,4 +7,5 @@ $router->define([
     'home' => 'app/Controllers/HomeController.php',
     'ausleiheerfassen' => 'app/Controllers/AusleiheErfassenController.php',
     'ausleihen' => 'app/Controllers/AusleihenListeController.php',
+    'bearbeiten' => 'app/Controllers/AusleiheBearbeitenController.php'
 ]);
