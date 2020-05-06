@@ -12,10 +12,14 @@ class Ausleihen{
 
     public $db;
 
-    public function __construct($title = null, $completed = null)
+    public function __construct($vorname = null, $nachname = null, $email = null, $telefon = null, $mitgliedstatus = null, $FK_film_id = null)
     {
-        $this->title     = $title;
-        $this->completed = $completed;
+        $this->vorname     = $vorname;
+        $this->nachname = $nachname;
+        $this->email = $email;
+        $this->telefon = $telefon;
+        $this->mitgliedstatus = $mitgliedStatus;
+        $this->FK_film_id = $FK_film_id;
 
         // DB Verbinden (core/database.php)
         $this->db = connectToDatabase();
@@ -43,20 +47,25 @@ class Ausleihen{
     // Neue Ausleihe
     public function create()
     {
-        $statement = $this->db->prepare('INSERT INTO ausleihe (fk_kunden_id, fk_film_id, ausleihen_bis, ausleih_status) VALUES (:fk_kunden_id, :fk_film_id, :ausleihen_bis, 1)');
-        $statement->bindParam(':fk_kunden_id', $this->fk_kunden_id, PDO::PARAM_INT);
-        $statement->bindParam(':fk_film_id', $this->fk_film_id, PDO::PARAM_INT);
-        $statement->bindParam(':ausleihen_bis', $this->fk_film_id)
+        $statement = $this->db->prepare('INSERT INTO ausleihen (vorname, nachname, email, telefon, mitgliedstatus, FK_film_id, ausleihdatum) VALUES (:vorname, :nachname, :email, :telefon, :mitgliedstatus, :FK_film_id, :ausleihdatum)');
+        $statement->bindParam(':vorname', $vornahme, PDO::PARAM_STR);
+        $statement->bindParam(':nachname', $nachname, PDO::PARAM_STR);
+        $statement->bindParam(':email', $email, PDO::PARAM_STR);
+        $statement->bindParam(':telefon', $telefon, PDO::PARAM_STR);
+        $statement->bindParam(':mitgliedstatus', $mitgliedstatus, PDO::PARAM_STR);
+        $statement->bindParam(':FK_film_id', $FK_film_id, PDO::PARAM_INT);
+        $statement->bindParam(':ausleihdatum', $ausleihdatum, PDO::PARAM_STR);
 
         return $statement->execute();
     }
 
-    // Update/Edit Task
+    
     public function update(int $id)
     {
-        $statement = $this->db->prepare('UPDATE tasks SET title = :title, completed = :completed WHERE id = :id');
-        $statement->bindParam(':title', $this->title, PDO::PARAM_STR);
-        $statement->bindParam(':completed', $this->completed, PDO::PARAM_BOOL);
+        $statement = $this->db->prepare('UPDATE ausleihen SET vorname = :vorname, nachname = :nachname, email = :email, telefon = :telefon, FK_film_id = :FK_film_id, ausleihstatus = :ausleihstatus WHERE id = :id');
+        $statement->bindParam(':vorname', $vorname, PDO::PARAM_STR);
+        $statement->bindParam(':nachname', $nachname, PDO::PARAM_STR);
+        $statement->bindParam(':nachname', $nachname, PDO::PARAM_STR);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
 
         return $statement->execute();
@@ -65,7 +74,7 @@ class Ausleihen{
     // Lösche Task
     public function delete(int $id)
     {
-        $statement = $this->db->prepare('DELETE FROM tasks WHERE id = :id');
+        $statement = $this->db->prepare('DELETE FROM ausleihen WHERE id = :id');
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
 
         return $statement->execute();
