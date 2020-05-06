@@ -65,11 +65,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 }
 
-function saveToDatabase(string $name, string $message)
+function saveToDatabase(string $vorname, string $nachname, string $email, string $ausgehlentesvideo, string $telefon, string $mitgliederstatus)
 {
     global $database, $ausgehlentesvideoEntries;
 
-    $newEntry = ['vorname' => $vorname, 'nachname' => $nachname, 'email' => $email, 'ausgehlentesvideo' => $ausgehlentesvideo, ];
+    $newEntry = ['vorname' => $vorname, 'nachname' => $nachname, 'email' => $email, 'ausgehlentesvideo' => $ausgehlentesvideo, 'telefon' => $telefon, 'mitgliederstatus' => $mitgliederstatus, ];
 
     // Eintrag an Anfang von Array einfügen
     array_unshift($ausgehlentesvideoEntries, $newEntry);

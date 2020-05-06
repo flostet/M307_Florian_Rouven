@@ -8,7 +8,7 @@
 <body>
 <div class="wrapper">
 
-    <h4>Ausgelihene Filme</h4>
+    <h4>Ausgeliehene Filme</h4>
     <ul>
         <?php foreach ($Ausleihe as $ausleihe): ?>
             <li>
