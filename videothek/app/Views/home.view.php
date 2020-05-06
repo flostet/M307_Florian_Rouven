@@ -14,7 +14,6 @@
   <a href="ausleihen">Ausleihe Liste</a>
 </div>
 
-<h1>Willkommen bei der Vidicted Videothek!</h1>
 
 
 <div>
@@ -24,7 +23,7 @@
                 Gesamt Anzahl Videos
                 </h2>
                 <p class="counter">
-                
+                30
                 </p>
             </div>
 
@@ -33,7 +32,7 @@
                     Ausgeliehene Videos
                 </h2>
                 <p class="counter">
-                    
+                    20
                 </p>
             </div>
 
@@ -42,7 +41,7 @@
                     Verfügbare Videos
                 </h2>
                 <p class="counter">
-                    
+                    10
                 </p>
             </div>
 

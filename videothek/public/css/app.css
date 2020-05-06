@@ -3,7 +3,7 @@ body {
     width: 100%;
     margin: 0 auto; 
     padding: 0;
-    background-color: #343434;
+    background-color: #363636;
 }
 
 .welcome {
@@ -12,16 +12,17 @@ body {
 
 /* Add a black background color to the top navigation */
 .topnav {
-    height: 100;
-    width: 250;
-    position: fixed;
-    z-index: 1;
-	top: 0;
-	left: 0;
-	background-color: #363636;
-	overflow-x: hidden;
-	text-align: center;
-  }
+  height: 100;
+  width: 250;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #363636;
+  overflow-x: hidden;
+  text-align: center;
+  align-items: center;
+}
   
   /* Style the links inside the navigation bar */
   .topnav a {
@@ -47,15 +48,13 @@ body {
     color: white;
   }
 
-
   .container {
-	padding: 40px;
-	position: absolute;
-	display: flex;
-	flex-wrap: nowrap;
-	height: 50%;
-	width: 500px;
-	margin: 10;
+    padding: 40px;
+    display: flex;
+      flex-direction: row;
+    height: 70%;
+    width: 100%;
+    margin: 10;
 }
 
 .container>div {

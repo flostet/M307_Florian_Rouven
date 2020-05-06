@@ -43,6 +43,7 @@ class Ausleihen{
         $statement = $this->db->prepare('INSERT INTO ausleihe (fk_kunden_id, fk_film_id, ausleihen_bis, ausleih_status) VALUES (:fk_kunden_id, :fk_film_id, :ausleihen_bis, 1)');
         $statement->bindParam(':fk_kunden_id', $this->fk_kunden_id, PDO::PARAM_INT);
         $statement->bindParam(':fk_film_id', $this->fk_film_id, PDO::PARAM_INT);
+        $statement->bindParam(':ausleihen_bis', $this->fk_film_id)
 
         return $statement->execute();
     }
