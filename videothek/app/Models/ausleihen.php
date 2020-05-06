@@ -12,13 +12,13 @@ class Ausleihen{
 
     public $db;
 
-    public function __construct($vorname = null, $nachname = null, $email = null, $telefon = null, $mitgliedstatus = null, $FK_film_id = null)
+    public function __construct($vorname = null, $nachname = null, $email = null, $telefon = null, $mitgliedStatus = null, $FK_film_id = null)
     {
         $this->vorname     = $vorname;
         $this->nachname = $nachname;
         $this->email = $email;
         $this->telefon = $telefon;
-        $this->mitgliedstatus = $mitgliedStatus;
+        $this->mitgliedStatus = $mitgliedStatus;
         $this->FK_film_id = $FK_film_id;
 
         // DB Verbinden (core/database.php)

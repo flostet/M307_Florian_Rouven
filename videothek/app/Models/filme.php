@@ -32,12 +32,4 @@ class Filme{
 
         return $statement->fetchAll();
     }
-
-    public function countRecords()
-    {
-        $statement = $this->db->prepare('SELECT COUNT(id) FROM filme');
-        $statement->execute();
-
-        return $statement->fetchAll();
-    }
 }

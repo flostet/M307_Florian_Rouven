@@ -23,7 +23,7 @@
                 Gesamt Anzahl Videos
                 </h2>
                 <p class="counter">
-                <?=$countRecords ?>
+                <?= count($countFilme); ?>
                 </p>
             </div>
 
@@ -32,16 +32,7 @@
                     Ausgeliehene Videos
                 </h2>
                 <p class="counter">
-                    20
-                </p>
-            </div>
-
-            <div>
-                <h2>
-                    Verfügbare Videos
-                </h2>
-                <p class="counter">
-                    10
+                <?= count($countAusleihen); ?>
                 </p>
             </div>
 
