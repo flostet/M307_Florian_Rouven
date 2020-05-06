@@ -21,7 +21,7 @@
 <?php if(count($errors) > 0): ?>
     <ul class="alert alert-block">
         <?php foreach($errors as $error): ?>
-            <li><?= $error ?></li>
+            <li><?= $error ?></li> 
         <?php endforeach; ?>
     </ul>
 <?php endif; ?>
