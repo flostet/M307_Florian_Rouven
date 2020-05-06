@@ -14,8 +14,12 @@
 
 <form action="<?= $actionString ?>" method="post">
     <br>
-    <label for="inputName">Name:</label>
-    <input name="inputName" type="text" value='<?= $Ausleihe->name ?>'>
+    <label for="inputName">Vorname:</label>
+    <input name="inputName" type="text" value='<?= $Ausleihe->vorname ?>'>
+    <br>
+    <br>
+    <label for="inputName">Nachname:</label>
+    <input name="inputName" type="text" value='<?= $Ausleihe->nachname ?>'>
     <br>
     <br>
     <label for="inputEmail">Email:</label>
@@ -54,8 +58,6 @@
     <br>
     <br>
 </form>
-
-
 
 </body>
 </html>
