@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Meine Seite</title>
+    <title>Ausleihe erfassen</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href='public/css/app.css' rel="stylesheet" >
 </head>
@@ -43,7 +43,7 @@
     </div>
     <div class="control-group">
         <label class="control-label" for="email">Email:</label>
-        <input name="email" class="input-xlarge" id="email"><?= $email ?></input>
+        <input name="email" class="input-xlarge" id="email">
     </div>
     <div class="control-group">
         <label class="control-label" for="ausgelehntes video">Ausgelehntes Video:</label>
