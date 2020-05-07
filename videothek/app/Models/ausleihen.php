@@ -66,7 +66,7 @@ class Ausleihen{
             $this->ausleihdatum = date("Y-m-d", strtotime("+70 days"));
         }
 
-        $statement = $this->db->prepare("INSERT INTO ausleihen (vorname, nachname, email, telefon, mitgliedstatus, FK_film_id, ausleihdatum, ausleihStatus) VALUES (:vorname, :nachname, :email, :telefon, :mitgliedstatus, :FK_film_id, :ausleihdatum, 0)");
+        $statement = $this->db->prepare("INSERT INTO ausleihen (vorname, nachname, email, telefon, mitgliedstatus, FK_film_id, ausleihdatum, ausleihStatus) VALUES (:vorname, :nachname, :email, :telefon, :mitgliedstatus, :FK_film_id, :ausleihdatum, :ausleihStatus)");
         $statement->bindParam(':vorname', $this->vorname, PDO::PARAM_STR);
         $statement->bindParam(':nachname', $this->nachname, PDO::PARAM_STR);
         $statement->bindParam(':email', $this->email, PDO::PARAM_STR);
@@ -74,6 +74,7 @@ class Ausleihen{
         $statement->bindParam(':mitgliedstatus', $this->mitgliedStatus, PDO::PARAM_STR);
         $statement->bindParam(':FK_film_id', $this->FK_film_id, PDO::PARAM_INT);
         $statement->bindParam(':ausleihdatum', $this->ausleihdatum);
+        $statement->bindParam(':ausleihStatus', 0);
 
         return $statement->execute();
     }

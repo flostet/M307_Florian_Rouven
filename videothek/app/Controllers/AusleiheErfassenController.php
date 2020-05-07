@@ -4,16 +4,17 @@ require 'app/Views/ausleiheerfassen.view.php';
 require 'app/Models/filme.php';
 require 'app/Models/ausleihen.php';
 
+$filme = new Filme();
+$filme->getAll();
 
 $errors   = [];
 
-$vorname = $_POST['vorname'] ?? '';
-$nachname = $_POST['nachname'] ?? '';
-$email = $_POST['email'] ?? '';
-$ausgehlentesvideo     = $_POST['film'] ?? '';
-$telefon = $_POST['telefon'] ?? '';
-$mitgliederstatus = $_POST['mitgliederstatus'] ?? '';
-
+$vorname = htmlspecialchars($_POST['vorname'] ?? '');
+$nachname = htmlspecialchars($_POST['nachname'] ?? '');
+$email = htmlspecialchars($_POST['email'] ?? '');
+$ausgehlentesvideo     = htmlspecialchars($_POST['film'] ?? '');
+$telefon = htmlspecialchars($_POST['telefon'] ?? '');
+$mitgliederstatus = htmlspecialchars($_POST['mitgliederstatus'] ?? '');
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') 
 {
@@ -38,7 +39,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
     }
     if($telefon !== '')
     {
-        if((preg_match('/^[\+ 0-9]+$/', $telefon)) === FALSE)
+        if((preg_match('/^[\+ 0-9]+$/', $telefon)) === FALSE || ctype_alpha($telefon))
         {
             $errors[] = 'Die Telefonnummer ' . $telefon . ' ist ungültig';
         }
@@ -59,11 +60,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         $ausleihe->create();
         header('Location: home');
     } else {
-        echo '<ul>';
         foreach($errors as $error)
         {
-            echo '<li>' . $error . '</li>';
+            echo '<li class="fontcolor">' . $error . '</li>';
         }
-        echo '</ul>';
     }
 }

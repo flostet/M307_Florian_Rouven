@@ -6,7 +6,6 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="public/css/form.css" rel="stylesheet">
     <link href="public/css/app.css" rel="stylesheet">
-
 </head>
 <body>
 <div class="wrapper">
@@ -20,23 +19,23 @@
     <h4 class="fontcolor">Neue Ausleihe erfassen</h4>
     <form action="erfassen" method="post">
         <div class="form-group">
-            <label class="form-label" for="vorname">Vorname: </label>
-            <input class="form-control" type="text" name="vorname" id="vorname">
+            <label class="form-label" for="vorname">Vorname*: </label>
+            <input class="form-control" type="text" name="vorname" id="vorname" required>
 
-            <label class="form-label" for="nachname">Nachname: </label>
-            <input class="form-control" type="text" name="nachname" id="nachname">
+            <label class="form-label" for="nachname">Nachname*: </label>
+            <input class="form-control" type="text" name="nachname" id="nachname" required>
 
-            <label class="form-label" for="email">Email: </label>
-            <input class="form-control" type="email" name="email" id="email">
+            <label class="form-label" for="email">Email*: </label>
+            <input class="form-control" type="email" name="email" id="email" required>
 
             <label class="form-label" for="telefon">Telefon: </label>
             <input class="form-control" type="text" name="telefon" id="telefon">
 
-            <label class="form-label" for="film">Film: </label>
-            <input class="form-control" type="text" name="film" id="film">
+            <label class="form-label" for="film">Film*: </label>
+            <input class="form-control" type="text" name="film" id="film" required>
 
-            <label class="form-label" for="mitgliederstatus">Mitgliederstatus: </label> <br>
-            <select class="selectpicker" name="mitgliederstatus" id="mitgliederstatus">
+            <label class="form-label" for="mitgliederstatus">Mitgliederstatus*: </label> <br>
+            <select class="field-select" name="mitgliederstatus" id="mitgliederstatus">
                 <option selected="mitgliederstatus" id="mitgliederstatus">Wähle einen Status aus</option>
                 <?php
 
@@ -48,6 +47,7 @@
                 <?php } ?> 
             </select>
             <br>
+            
         </div>
 
         <div class="form-actions">
@@ -57,6 +57,5 @@
     </form>
 
 </div>
-
 </body>
 </html>

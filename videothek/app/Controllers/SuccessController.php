@@ -12,12 +12,12 @@ $filme = new Filme();
 $film = $filme->getById($ausleihe['FK_film_id']);
 
 
-$vorname = $_POST['vorname'] ?? '';
-$nachname = $_POST['nachname'] ?? '';
-$email = $_POST['email'] ?? '';
-$ausgehlentesvideo     = $_POST['film'] ?? '';
-$telefon = $_POST['telefon'] ?? '';
-$ausleihstatus = $_POST['ausleihStatus'] ?? '';
+$vorname = htmlspecialchars($_POST['vorname'] ?? '');
+$nachname = htmlspecialchars($_POST['nachname'] ?? '');
+$email = htmlspecialchars($_POST['email'] ?? '');
+$ausgehlentesvideo     = htmlspecialchars($_POST['film'] ?? '');
+$telefon = htmlspecialchars($_POST['telefon'] ?? '');
+$ausleihstatus = htmlspecialchars($_POST['ausleihStatus'] ?? '');
 
 $errors = [];
 
@@ -44,7 +44,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
     }
     if($telefon !== '')
     {
-        if((preg_match('/^[\+ 0-9]+$/', $telefon)) === FALSE)
+        if((preg_match('/^[\+ 0-9]+$/', $telefon)) === FALSE || ctype_alpha($telefon))
         {
             $errors[] = 'Die Telefonnummer ' . $telefon . ' ist ungültig';
         }
@@ -66,12 +66,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         header('Location: liste');
     } else {
         require 'app/Views/ausleihebearbeiten.view.php';
-        echo '<ul>';
         foreach($errors as $error)
         {
-            echo '<li>' . $error . '</li>';
+            echo '<li class="fontcolor">' . $error . '</li>';
         }
-        echo '</ul>';
     }
 }
 
