@@ -1,6 +1,7 @@
 <?php
 
-class Filme{
+class Filme
+{
     public $id;
     public $titel;
 
@@ -31,5 +32,11 @@ class Filme{
         $statement->execute();
 
         return $statement->fetchAll();
+    }
+
+    public function getallFilms()
+    {
+        $select = $this->db->query("SELECT * FROM filme");
+        return $select;
     }
 }

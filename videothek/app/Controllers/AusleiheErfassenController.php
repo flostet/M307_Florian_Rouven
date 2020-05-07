@@ -1,79 +1,74 @@
 <?php
 
-$database = 'database/filme.txt';
 require 'app/Views/ausleiheerfassen.view.php';
+require 'app/Models/filme.php';
+require 'app/Models/ausleihen.php';
 
-// Datenbankfile erstellen, falls nicht vorhanden
-if( ! file_exists($database)) {
-    touch($database);
-}
-
-// Einträge laden
-$ausgehlentesvideoEntries = json_decode(file_get_contents($database), true);
-
-// Falls keine Einträge vorhanden ein leeres Array verwenden
-if($ausgehlentesvideoEntries === null) {
-    $ausgehlentesvideoEntries = [];
-}
 
 $errors   = [];
-$newEntry = false;
 
-$vorname     = $_POST['vorname'] ?? '';
-$nachname     = $_POST['nachname'] ?? '';
-$email     = $_POST['email'] ?? '';
-$ausgehlentesvideo     = $_POST['ausgehlentes videos'] ?? '';
-$telefon     = $_POST['telefon'] ?? '';
-$mitgliederstatus     = $_POST['mitgliederstatus'] ?? '';
+$vorname = $_POST['vorname'] ?? '';
+$nachname = $_POST['nachname'] ?? '';
+$email = $_POST['email'] ?? '';
+$ausgehlentesvideo     = $_POST['film'] ?? '';
+$telefon = $_POST['telefon'] ?? '';
+$mitgliederstatus = $_POST['mitgliederstatus'] ?? '';
 
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    if($vorname === '') {
-        $errors[] = 'Bitte geben Sie einen Vornamen ein.';
-    }
-    if($nachname === '') {
-        $errors[] = 'Bitte geben Sie einen Nachnamen ein.';
-    }
-    if($email === '') {
-        $errors[] = 'Bitte geben Sie eine Email ein.';
-    }
-    if($ausgehlentesvideo === '') {
-        $errors[] = 'Bitte geben Sie das Video an welches Sie auslehnen wollen.';
-    }
-    if($telefon === '') {
-        $errors[] = 'Bitte geben Sie eine Telefonnummer an.';
-    }
-    if($mitgliederstatus === '') {
-        $errors[] = 'Bitte geben Sie einen Mitgliederstatus an.';
-    }
-
-    if(count($errors) === 0) {
-        
-        saveToDatabase($vorname, $nachname, $email, $ausgehlentesvideo, $telefon, $mitgliederstatus);
-        
-        // Bestätigungsnachricht anzeigen
-        $newEntry = true;
-
-        // Formularfelder leeren
-        $vorname     = '';
-        $nachname  = '';
-        $email = '';
-        $ausgehlentesvideo  = '';
-        $telefon     = '';
-        $mitgliederstatus     = '';
-    }
-
-}
-
-function saveToDatabase(string $vorname, string $nachname, string $email, string $ausgehlentesvideo, string $telefon, string $mitgliederstatus)
+if($_SERVER['REQUEST_METHOD'] === 'POST') 
 {
-    global $database, $ausgehlentesvideoEntries;
+    $vorname = trim($vorname);
+    $nachname = trim($nachname);
+    $email = trim($email);
+    $telefon = trim($telefon);
+    $ausgehlentesvideo = trim($ausgehlentesvideo);
+    $mitgliederstatus = trim($mitgliederstatus);
 
-    $newEntry = ['vorname' => $vorname, 'nachname' => $nachname, 'email' => $email, 'ausgehlentesvideo' => $ausgehlentesvideo, 'telefon' => $telefon, 'mitgliederstatus' => $mitgliederstatus, ];
+    if($vorname === '')
+    {
+        $errors[] = 'Bitte geben sie einen Vornamen ein.';
+        $vorname = '';
+    }
+    if($nachname === '')
+    {
+        $errors[] = 'Bitte geben Sie einen Nachnamen ein.';
+        $nachname = '';
+    }
+    if(strpos($email, '@') === false)
+    {
+        $errors[] = 'Die Email Adresse muss ein @ Zeichen enthalten.';
+        $email = '';
+    }
+    if((preg_match('/^[\+ 0-9]+$/', $telefon)) === FALSE)
+    {
+        $errors[] = 'Die Telefonnummer ' . $telefon . ' ist ungültig';
+        $telefon = '';
+    }
+    if($ausgehlentesvideo < 1 || $ausgehlentesvideo > 100)
+    {
+        $errors[] = 'Der eingegebene Film ist ungültig';
+        $ausgehlentesvideo = '';
+    }
+    if(strtolower($mitgliederstatus) !== 'keine' && strtolower($mitgliederstatus) !== 'bronze' && strtolower($mitgliederstatus) !== 'silber' && strtolower($mitgliederstatus) !== 'Gold')
+    {
+        $errors[] = 'Der eingegebene Mitgliederstatus ist ungültig.';
+        $mitgliederstatus = '';
+    }
 
-    // Eintrag an Anfang von Array einfügen
-    array_unshift($ausgehlentesvideoEntries, $newEntry);
 
-    // Daten in File schreiben
-    file_put_contents($database, json_encode($ausgehlentesvideoEntries));
+    if (count($errors) == 0) 
+    {
+        $ausleihe = new Ausleihen($_POST['vorname'] ?? '', $_POST['nachname'] ?? '', $_POST['email'] ?? '', $_POST['telefon'] ?? '', $_POST['mitgliederstatus'] ?? '', $_POST['film'] ?? '' );
+        $ausleihe->create();
+    } else {
+        echo '<ul>';
+        foreach($errors as $error)
+        {
+            echo '<li>' . $error . '</li>';
+        }
+        echo '</ul>';
+    }
+
+
+    
 }

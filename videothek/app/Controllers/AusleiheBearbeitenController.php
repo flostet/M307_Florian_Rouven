@@ -1,14 +1,14 @@
-<?php 
+<?php
 
-require 'app/Models/ausleihen.php'; 
+require 'app/Models/ausleihen.php';
 require 'app/Models/filme.php';
 
-$Ausleihen = new Ausleihen();
-$Ausleihe = $Ausleihen->getAll();
+$id = $_GET['id'];
 
-$Filme = new Filme();
+$ausleihen = new Ausleihen();
+$ausleihe = $ausleihen->getById($id);
 
-
-
+$filme = new Filme();
+$film = $filme->getById($ausleihe['FK_film_id']);
 
 require 'app/Views/ausleihebearbeiten.view.php';

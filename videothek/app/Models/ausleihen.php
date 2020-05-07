@@ -41,20 +41,37 @@ class Ausleihen{
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
 
-        return $statement->fetchAll();
+        return $statement->fetchAll()[0];
     }
 
     // Neue Ausleihe
     public function create()
     {
+        if($this->mitgliedStatus === "keine")
+        {
+            $this->ausleihdatum = date("Y-m-d", strtotime("+30 days"));
+        }
+        else if($this->mitgliedStatus === "Bronze")
+        {
+            $this->ausleihdatum = date("Y-m-d", strtotime("+40 days"));
+        }
+        else if($this->mitgliedStatus === "Silber")
+        {
+            $this->ausleihdatum = date("Y-m-d", strtotime("+50 days"));
+        }
+        else if($this->mitgliedStatus === "Gold")
+        {
+            $this->ausleihdatum = date("Y-m-d", strtotime("+70 days"));
+        }
+
         $statement = $this->db->prepare('INSERT INTO ausleihen (vorname, nachname, email, telefon, mitgliedstatus, FK_film_id, ausleihdatum) VALUES (:vorname, :nachname, :email, :telefon, :mitgliedstatus, :FK_film_id, :ausleihdatum)');
-        $statement->bindParam(':vorname', $vornahme, PDO::PARAM_STR);
-        $statement->bindParam(':nachname', $nachname, PDO::PARAM_STR);
-        $statement->bindParam(':email', $email, PDO::PARAM_STR);
-        $statement->bindParam(':telefon', $telefon, PDO::PARAM_STR);
-        $statement->bindParam(':mitgliedstatus', $mitgliedstatus, PDO::PARAM_STR);
-        $statement->bindParam(':FK_film_id', $FK_film_id, PDO::PARAM_INT);
-        $statement->bindParam(':ausleihdatum', $ausleihdatum, PDO::PARAM_STR);
+        $statement->bindParam(':vorname', $this->vorname, PDO::PARAM_STR);
+        $statement->bindParam(':nachname', $this->nachname, PDO::PARAM_STR);
+        $statement->bindParam(':email', $this->email, PDO::PARAM_STR);
+        $statement->bindParam(':telefon', $this->telefon, PDO::PARAM_STR);
+        $statement->bindParam(':mitgliedstatus', $this->mitgliedStatus, PDO::PARAM_STR);
+        $statement->bindParam(':FK_film_id', $this->FK_film_id, PDO::PARAM_INT);
+        $statement->bindParam(':ausleihdatum', $this->ausleihdatum);
 
         return $statement->execute();
     }
@@ -63,10 +80,13 @@ class Ausleihen{
     public function update(int $id)
     {
         $statement = $this->db->prepare('UPDATE ausleihen SET vorname = :vorname, nachname = :nachname, email = :email, telefon = :telefon, FK_film_id = :FK_film_id, ausleihstatus = :ausleihstatus WHERE id = :id');
-        $statement->bindParam(':vorname', $vorname, PDO::PARAM_STR);
-        $statement->bindParam(':nachname', $nachname, PDO::PARAM_STR);
-        $statement->bindParam(':nachname', $nachname, PDO::PARAM_STR);
+        $statement->bindParam(':vorname', $this->vorname, PDO::PARAM_STR);
+        $statement->bindParam(':nachname', $this->nachname, PDO::PARAM_STR);
+        $statement->bindParam(':email', $this->email, PDO::PARAM_STR);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->bindParam(':telefon', $this->telefon, PDO::PARAM_STR);
+        $statement->bindParam(':FK_film_id', $this->FK_film_id, PDO::PARAM_INT);
+        $statement->bindParam(':ausleihstatus', $this->ausleihstatus, PDO::PARAM_INT);
 
         return $statement->execute();
     }
@@ -79,4 +99,14 @@ class Ausleihen{
 
         return $statement->execute();
     }
+
+    public function getActive()
+    {
+        $statement = $this->db->prepare('SELECT * FROM ausleihen WHERE ausleihstatus = 0 ORDER BY ausleihdatum ASC');
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
+
+
 }

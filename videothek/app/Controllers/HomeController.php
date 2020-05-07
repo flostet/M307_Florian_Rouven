@@ -7,7 +7,7 @@ $filme = new Filme();
 $countFilme = $filme->getAll();
 
 $ausleihen = new Ausleihen();
-$countAusleihen = $ausleihen->getAll();
+$countAusleihen = $ausleihen->getActive();
 
 
 require 'app/Views/home.view.php';
