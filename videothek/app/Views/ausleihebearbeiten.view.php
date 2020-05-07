@@ -5,11 +5,18 @@
     <title>Ausleihe erfassen</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="public/css/form.css" rel="stylesheet">
+    <link href="public/css/app.css" rel="stylesheet">
 </head>
 <body>
-<div class="wrapper">
 
-    <h4>Ausleihe bearbeiten</h4>
+<div class="topnav">
+  <a  href="home">Home</a>
+  <a href="erfassen">Ausleihe Erfassen</a>
+  <a href="liste">Ausleihe Liste</a>
+</div>
+
+<div class="wrapper">
+    <h1 class="fontcolor">Ausleihe bearbeiten</h1>
     <form action="erfolgreich?id=<?=$ausleihe['id']?>" method="post">
         <div class="form-group">
             <label class="form-label" for="vorname">Vorname: </label>
@@ -24,16 +31,14 @@
             <label class="form-label" for="telefon">Telefon: </label>
             <input class="form-control" type="text" name="telefon" id="telefon" value="<?=$ausleihe['telefon'] ?? '' ?>">
 
-            <!-- Film Liste Button einfügen -->
             <label class="form-label" for="film">Film: </label>
-            <input class="form-control" type="text" name="film" id="film" value="<?php foreach($film as $value) {echo $value[1]; }?>">
+            <input class="form-control" type="text" name="film" id="film" value="<?=$ausleihe['FK_film_id']?>">
 
             <label class="form-label" for="mitgliederstatus">Mitgliederstatus: </label>
             <input class="form-control" type="text" name="mitgliederstatus" id="mitgliederstatus" value="<?=$ausleihe['mitgliedStatus'] ?? '' ?>" readonly>
 
-            <!-- Dieses Feld mit einem Dropdown Menu machen -->
-            <label class="form-label" for="ausleihstatus">Ausleihstatus: </label>
-            <input class="form-control" type="text" name="ausleihstatus" id="ausleihstatus" value="<?= $ausleihe['ausleihStatus'] ?>">
+            <label class="form-label" for="ausleihstatus">Ausleihstatus (0 = Ausgeliehen und 1 = Zurückgegeben):</label>
+            <input class="form-control" type="text" name="ausleihStatus" id="ausleihStatus" value="<?=$ausleihe['ausleihStatus'] ?? '' ?>">
         </div>
 
         <div class="form-actions">

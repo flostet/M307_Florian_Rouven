@@ -27,39 +27,37 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
     if($vorname === '')
     {
         $errors[] = 'Bitte geben sie einen Vornamen ein.';
-        $vorname = '';
     }
     if($nachname === '')
     {
         $errors[] = 'Bitte geben Sie einen Nachnamen ein.';
-        $nachname = '';
     }
     if(strpos($email, '@') === false)
     {
         $errors[] = 'Die Email Adresse muss ein @ Zeichen enthalten.';
-        $email = '';
     }
-    if((preg_match('/^[\+ 0-9]+$/', $telefon)) === FALSE)
+    if($telefon !== '')
     {
-        $errors[] = 'Die Telefonnummer ' . $telefon . ' ist ungültig';
-        $telefon = '';
+        if((preg_match('/^[\+ 0-9]+$/', $telefon)) === FALSE)
+        {
+            $errors[] = 'Die Telefonnummer ' . $telefon . ' ist ungültig';
+        }
     }
-    if($ausgehlentesvideo < 1 || $ausgehlentesvideo > 100)
+    if($ausgehlentesvideo < 1 || $ausgehlentesvideo > 100 || $ausgehlentesvideo == '')
     {
         $errors[] = 'Der eingegebene Film ist ungültig';
-        $ausgehlentesvideo = '';
     }
-    if(strtolower($mitgliederstatus) !== 'keine' && strtolower($mitgliederstatus) !== 'bronze' && strtolower($mitgliederstatus) !== 'silber' && strtolower($mitgliederstatus) !== 'Gold')
+    if(strtolower($mitgliederstatus) !== 'keine' && strtolower($mitgliederstatus) !== 'bronze' && strtolower($mitgliederstatus) !== 'silber' && strtolower($mitgliederstatus) !== 'gold')
     {
         $errors[] = 'Der eingegebene Mitgliederstatus ist ungültig.';
-        $mitgliederstatus = '';
     }
 
 
     if (count($errors) == 0) 
     {
-        $ausleihe = new Ausleihen($_POST['vorname'] ?? '', $_POST['nachname'] ?? '', $_POST['email'] ?? '', $_POST['telefon'] ?? '', $_POST['mitgliederstatus'] ?? '', $_POST['film'] ?? '' );
+        $ausleihe = new Ausleihen($vorname, $nachname, $email, $telefon, $mitgliederstatus, $ausgehlentesvideo);
         $ausleihe->create();
+        header('Location: home');
     } else {
         echo '<ul>';
         foreach($errors as $error)
@@ -68,7 +66,4 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         }
         echo '</ul>';
     }
-
-
-    
 }

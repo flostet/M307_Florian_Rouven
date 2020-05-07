@@ -5,17 +5,19 @@
     <title>Ausleihe erfassen</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="public/css/form.css" rel="stylesheet">
+    <link href="public/css/app.css" rel="stylesheet">
+
 </head>
 <body>
 <div class="wrapper">
 
 <div class="topnav"> 
     <a  href="home">Home</a> 
-    <a class="active" href="ausleiheerfassen">Ausleihe Erfassen</a> 
-    <a href="ausleihen">Ausleihe Liste</a> 
+    <a class="active" href="erfassen">Ausleihe Erfassen</a> 
+    <a href="liste">Ausleihe Liste</a> 
 </div>
 
-    <h4>Neue Ausleihe erfassen</h4>
+    <h4 class="fontcolor">Neue Ausleihe erfassen</h4>
     <form action="erfassen" method="post">
         <div class="form-group">
             <label class="form-label" for="vorname">Vorname: </label>
@@ -33,14 +35,24 @@
             <label class="form-label" for="film">Film: </label>
             <input class="form-control" type="text" name="film" id="film">
 
-            <!-- Dieses Feld mit einem Dropdown Menu machen -->
-            <label class="form-label" for="mitgliederstatus">Mitgliederstatus: </label>
-            <input class="form-control" type="text" name="mitgliederstatus" id="mitgliederstatus">
+            <label class="form-label" for="mitgliederstatus">Mitgliederstatus: </label> <br>
+            <select class="selectpicker" name="mitgliederstatus" id="mitgliederstatus">
+                <option selected="mitgliederstatus" id="mitgliederstatus">Wähle einen Status aus</option>
+                <?php
+
+                $status = array("keine", "Bronze", "Silber", "Gold");
+
+                foreach($status as $item)
+                { ?>
+                    <option value="<?= $item ?>"><?=$item?></option>
+                <?php } ?> 
+            </select>
+            <br>
         </div>
 
         <div class="form-actions">
             <input class="btn btn-primary" type="submit" value="Ausleihen">
-            <input class="btn btn-secondary" type="cancel" value="Abbrechen">
+            <input class="btn btn-secondary" type="reset" value="Abbrechen">
         </div>
     </form>
 

@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <title>Meine Seite</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href='public/css/app.css' rel="stylesheet" >
+    <link href='public/css/app.css' rel="stylesheet">
 </head>
-<body>
+<body class="body1">
 
 <div class="topnav">
   <a class="active" href="home">Home</a>

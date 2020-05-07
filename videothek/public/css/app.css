@@ -3,7 +3,15 @@ body {
     width: 100%;
     margin: 0 auto; 
     padding: 0;
-    background-color: #363636;
+    background-color:#343434 !important;
+}
+
+label {
+  color: white !important;
+}
+
+.fontcolor {
+  color:white !important;
 }
 
 .welcome {
@@ -18,7 +26,7 @@ body {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #363636;
+  background-color: black;
   overflow-x: hidden;
   text-align: center;
   align-items: center;

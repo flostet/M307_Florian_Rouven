@@ -9,10 +9,11 @@ class Ausleihen{
     public $mitgliedStatus;
     public $FK_film_id;
     public $ausleihdatum;
+    public $ausleihstatus;
 
     public $db;
 
-    public function __construct($vorname = null, $nachname = null, $email = null, $telefon = null, $mitgliedStatus = null, $FK_film_id = null)
+    public function __construct($vorname = null, $nachname = null, $email = null, $telefon = null, $mitgliedStatus = null, $FK_film_id = null, $ausleihstatus = null)
     {
         $this->vorname     = $vorname;
         $this->nachname = $nachname;
@@ -20,6 +21,7 @@ class Ausleihen{
         $this->telefon = $telefon;
         $this->mitgliedStatus = $mitgliedStatus;
         $this->FK_film_id = $FK_film_id;
+        $this->ausleihstatus = $ausleihstatus;
 
         // DB Verbinden (core/database.php)
         $this->db = connectToDatabase();
@@ -47,24 +49,24 @@ class Ausleihen{
     // Neue Ausleihe
     public function create()
     {
-        if($this->mitgliedStatus === "keine")
+        if(strtolower($this->mitgliedStatus) === "keine")
         {
             $this->ausleihdatum = date("Y-m-d", strtotime("+30 days"));
         }
-        else if($this->mitgliedStatus === "Bronze")
+        else if(strtolower($this->mitgliedStatus) === "bronze")
         {
             $this->ausleihdatum = date("Y-m-d", strtotime("+40 days"));
         }
-        else if($this->mitgliedStatus === "Silber")
+        else if(strtolower($this->mitgliedStatus) === "silber")
         {
             $this->ausleihdatum = date("Y-m-d", strtotime("+50 days"));
         }
-        else if($this->mitgliedStatus === "Gold")
+        else if(strtolower($this->mitgliedStatus) === "gold")
         {
             $this->ausleihdatum = date("Y-m-d", strtotime("+70 days"));
         }
 
-        $statement = $this->db->prepare('INSERT INTO ausleihen (vorname, nachname, email, telefon, mitgliedstatus, FK_film_id, ausleihdatum) VALUES (:vorname, :nachname, :email, :telefon, :mitgliedstatus, :FK_film_id, :ausleihdatum)');
+        $statement = $this->db->prepare("INSERT INTO ausleihen (vorname, nachname, email, telefon, mitgliedstatus, FK_film_id, ausleihdatum, ausleihStatus) VALUES (:vorname, :nachname, :email, :telefon, :mitgliedstatus, :FK_film_id, :ausleihdatum, 0)");
         $statement->bindParam(':vorname', $this->vorname, PDO::PARAM_STR);
         $statement->bindParam(':nachname', $this->nachname, PDO::PARAM_STR);
         $statement->bindParam(':email', $this->email, PDO::PARAM_STR);
@@ -86,7 +88,7 @@ class Ausleihen{
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->bindParam(':telefon', $this->telefon, PDO::PARAM_STR);
         $statement->bindParam(':FK_film_id', $this->FK_film_id, PDO::PARAM_INT);
-        $statement->bindParam(':ausleihstatus', $this->ausleihstatus, PDO::PARAM_INT);
+        $statement->bindParam(':ausleihstatus', $this->ausleihstatus);
 
         return $statement->execute();
     }
@@ -107,6 +109,7 @@ class Ausleihen{
 
         return $statement->fetchAll();
     }
+
 
 
 }
